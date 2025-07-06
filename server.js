@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
+console.log("🔐 Using API Key:", OPENROUTER_API_KEY ? "Loaded ✅" : "❌ Not Loaded");
 
 // Replace with your actual OpenRouter API key
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
