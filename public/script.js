@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setLoadingState(true);
 
         try {
-            const response = await fetch('https://ai-diet-plan.onrender.com', {
+            const response = await fetch('https://ai-diet-plan.onrender.com/api/generate-diet-plan', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
