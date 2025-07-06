@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Plan Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Diet Plan Generator</h1>
+            <!-- <p>Get your personalized diet plan using AI</p> -->
+        </header>
+        
+        <main class="main-content">
+            <!-- Form Section -->
+            <section class="form-section">
+                <h2>Your Information</h2>
+                <div class="form-content">
+                    <form id="dietForm">
+                        <div class="form-group">
+                            <label for="weight">Weight (kg)</label>
+                            <input type="number" id="weight" name="weight" required min="30" max="300" step="0.1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="height">Height (cm)</label>
+                            <input type="number" id="height" name="height" required min="100" max="250" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" required min="1" max="120">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <div style="display: flex; gap: 20px; align-items: center;">
+                                <label style="display: flex; align-items: center; gap: 5px;">
+                                    <input type="radio" name="gender" value="male" required>
+                                    Male
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 5px;">
+                                    <input type="radio" name="gender" value="female" required>
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gymDays">Gym Days per Week</label>
+                            <select id="gymDays" name="gymDays" required>
+                                <option value="">Select days</option>
+                                <option value="0">0 days</option>
+                                <option value="1">1 day</option>
+                                <option value="2">2 days</option>
+                                <option value="3">3 days</option>
+                                <option value="4">4 days</option>
+                                <option value="5">5 days</option>
+                                <option value="6">6 days</option>
+                                <option value="7">7 days</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cost">Budget Level</label>
+                            <select id="cost" name="cost" required>
+                                <option value="">Select budget</option>
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="goal">Fitness Goal</label>
+                            <select id="goal" name="goal" required>
+                                <option value="">Select goal</option>
+                                <option value="weight-loss">Weight Loss</option>
+                                <option value="muscle-gain">Muscle Gain</option>
+                                <option value="maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dietaryPreference">Dietary Preference</label>
+                            <select id="dietaryPreference" name="dietaryPreference" required>
+                                <option value="">Select preference</option>
+                                <option value="vegetarian">Vegetarian</option>
+                                <option value="non-vegetarian">Non-Vegetarian</option>
+                                <option value="eggitarian">Eggitarian (Vegetarian + Eggs)</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="generate-btn" id="generateBtn">
+                            <span class="btn-text">Generate Diet Plan</span>
+                            <span class="btn-loading" style="display: none;">
+                                <div class="spinner"></div>
+                                Generating...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+            
+            <!-- Diet Plan Section -->
+            <section class="diet-section">
+                <div class="diet-content">
+                    <h2>Your Diet Plan</h2>
+                    <div id="dietPlan" class="diet-plan-container">
+                        <div class="placeholder">
+                            <div class="placeholder-icon">🥗</div>
+                            <p>Fill out the form and click "Generate Diet Plan" to get your personalized diet plan</p>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="generate-btn" id="downloadDietBtn" style="display: block;">Download Diet</button>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
