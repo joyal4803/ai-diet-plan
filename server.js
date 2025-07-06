@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-
+require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -10,7 +10,7 @@ app.use(express.json());
 
 
 // Replace with your actual OpenRouter API key
-const OPENROUTER_API_KEY = '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';
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
 // POST endpoint to generate diet plan
 app.post('/api/generate-diet-plan', async (req, res) => {
