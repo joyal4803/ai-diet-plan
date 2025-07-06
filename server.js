@@ -1,6 +1,6 @@
 // server.js
 require('dotenv').config();
-console.log("🔐 Using API Key:", OPENROUTER_API_KEY ? "Loaded ✅" : "❌ Not Loaded");
+
 
 const express = require('express');
 const cors = require('cors');
