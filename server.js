@@ -20,71 +20,87 @@ app.post('/api/generate-diet-plan', async (req, res) => {
     const { weight, height, age, gymDays, cost, goal, dietaryPreference } = req.body;
 
     // Compose the prompt for OpenAI
-    const prompt = `
-    You are a professional dietitian who specializes in Kerala-style diets.
-    
-    Generate a **3-day Kerala-style meal plan** for a person with the following information:
+    const prompt = `You are a certified dietitian specializing in Kerala-style meal plans.
+
+    Generate a personalized **3-day Kerala-style meal plan** for a user based on this information:
     
     - Weight: ${weight} kg
     - Height: ${height} cm
     - Age: ${age} years
     - Gym Days per Week: ${gymDays}
-    - Goal: ${goal}
+    - Goal: ${goal} (Weight Loss / Muscle Gain / Maintenance)
     - Budget: ${cost} (Low / Medium / High)
     - Dietary Preference: ${dietaryPreference}
     
     ---
     
     🎯 **Nutrition Goals**:
-    - Calculate Daily Calorie Target
-    - Calculate Daily Protein (use 2g per kg of body weight)
+    - Use **2g of protein per kg of body weight**
+      - For example, 75kg = 150g protein/day minimum
     
+    - Calculate Total Daily Calories
+    - Ensure daily protein >= required target (strict rule)
     
     ---
     
     📌 **Rules**:
-    1. **Protein intake must meet the calculated requirement** (e.g., 150g+ for 75 kg).
-    2. **Do NOT reduce protein for low budget** – only change food type.
-    3. Meals should be simple Kerala-style:
-       - Only include **rice + curry or fry** (no exotic foods)
-       - Snacks can be simple: peanuts, banana, chakka, guava, boiled eggs, or milk
+    1. **Protein amount must NOT go below the 2g/kg requirement**, even for low budgets.
+    2. Keep food Kerala-style and affordable.
+    3. Meals must be:
+       - Breakfast, Mid-Morning Snack, Lunch, Evening Snack, Dinner
+       - Examples: rice + curry, dosa + chutney, puttu + kadala, chappathi, bananas, boiled eggs, peanuts
     4. **Dietary Preference Rules**:
-       - **Vegetarian**: Only dairy, pulses, nuts, seeds, soya. No egg/meat/fish.
-       - **Eggitarian**: Vegetarian + eggs, dairy. No meat or fish.
-       - **Non-Vegetarian**: All foods allowed (eggs, meat, fish, legumes, dairy).
+       - Vegetarian: pulses, milk, paneer, soya, nuts (no eggs/meat/fish)
+       - Eggitarian: vegetarian + eggs (no meat/fish).add more eggs to complete protein goal
+       - Non-Vegetarian: all foods allowed and add more eggs to complete protein goal
     5. **Budget Rules**:
-       - Low: soya, milk, eggs (if allowed), legumes, sardines in low never ever include mutton,prawns etc
-       - Medium: add chicken, paneer, banana, nuts
-       - High: add beef, mutton, cashew, paneer, chicken breast
+       - Low: soya, legumes, sardines, eggs, milk, peanuts
+       - Medium: chicken, paneer, banana, curd, dry fruits
+       - High: chicken breast, beef, mutton, cashew, paneer, fish
     
     ---
     
     📅 Create plan for **3 days**:
-    Each day should have:
     
-    **Day X**
+    Format strictly like this:
+    first give total calorie intake todal protein goal per day
     
-    | Meal              | Food Item               | Portion           | Calories | Protein | Carbs | Fat |
-    |-------------------|--------------------------|-------------------|----------|---------|--------|------|
-    | Breakfast         |                          |                   |          |         |        |      |
-    | Mid-Morning Snack |                          |                   |          |         |        |      |
-    | Lunch             |                          |                   |          |         |        |      |
-    | Evening Snack     |                          |                   |          |         |        |      |
-    | Dinner            |                          |                   |          |         |        |      |
-    
-    **Daily Summary:** Protein: ___g | Carbs: ___g | Fat: ___g
-    
-    ---
-    
-    ✅ Markdown only. No JSON.  
-    ✅ Keep meals clear, short, and practical.  
-    ✅ Must complete all **3 days (Day 1, Day 2, Day 3)**.  
-    ✅ Use bold headings for each day: **Day 1**, **Day 2**, **Day 3**.
-    
-    Begin with **Day 1**.
-    `;
-    
+    **Day 1**
 
+    🔸 Total Calories: XXXX kcal  
+    🔸 Protein: XXg | Carbs: XXg | Fat: XXg
+    
+    🍽️ **Breakfast**  
+    - [Item]  
+    - Calories: ___ | Protein: ___g | Carbs: ___g | Fat: ___g  
+    
+    🍌 **Mid-Morning Snack**  
+    ...
+    
+    🍛 **Lunch**  
+    ...
+    
+    ☕ **Evening Snack**  
+    ...
+    
+    🌙 **Dinner**  
+    ...
+    
+    🔁 **Daily Summary**:  
+    Calories: ___ kcal  
+    Protein: ___g | Carbs: ___g | Fat: ___g
+    \`\`\`
+    
+    ✅ Repeat for **Day 2** and **Day 3**  
+    ✅ No table format  
+    ✅ Meals must be practical and realistic for a Kerala household.  
+    ✅ Highlight each day with **bold headings**: **Day 1**, **Day 2**, **Day 3**
+    first ensure proper calorie intake and give enough protein requriments use your brain.you are not giving enough protein give more and more protein and iincrease way more total calories also.think like a nutritionist dont be an idiot
+    want more protein and total calories increase it.give more i need more protein and total calorie.total protein per day is not still enough i need more give more.add more eggs to complete protein goal .give minimum of 5 eggs per day for eggeterian and non vegiterian.dont give mutton and chicken biriyani to low budget and add more number of eggs as it is low cost
+    
+    Start now with **Day 1**.
+    make sure till Protein: ___g | Carbs: ___g | Fat: ___g of dinner of day 3 is given 
+    `;
     try {
         const response = await axios.post(
             'https://openrouter.ai/api/v1/chat/completions',
