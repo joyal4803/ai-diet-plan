@@ -38,7 +38,7 @@ app.post('/api/generate-diet-plan', async (req, res) => {
     🎯 **Nutrition Goals**:
     - Calculate Daily Calorie Target
     - Calculate Daily Protein (use 2g per kg of body weight)
-    - Macro split: 40% Carbs, 30% Protein, 30% Fat
+    
     
     ---
     
