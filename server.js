@@ -22,7 +22,7 @@ app.post('/api/generate-diet-plan', async (req, res) => {
     // Compose the prompt for OpenAI
     const prompt = `You are a certified dietitian specializing in Kerala-style meal plans.
 
-    Generate a personalized **3-day Kerala-style meal plan** for a user based on this information:
+    Generate a personalized **2-day Kerala-style meal plan** for a user based on this information:
     
     - Weight: ${weight} kg
     - Height: ${height} cm
@@ -60,19 +60,20 @@ app.post('/api/generate-diet-plan', async (req, res) => {
     
     ---
     
-    📅 Create plan for **3 days**:
+    📅 Create plan for **2 days**:
     
     Format strictly like this:
-    first give total calorie intake todal protein goal per day
-    
-    **Day 1**
-
+    first give total calorie intake total protein goal per day
     🔸 Total Calories: XXXX kcal  
     🔸 Protein: XXg | Carbs: XXg | Fat: XXg
     
+    
+    **Day 1**
+
+    
     🍽️ **Breakfast**  
     - [Item]  
-    - Calories: ___ | Protein: ___g | Carbs: ___g | Fat: ___g  
+    - Calories: ___ |portion__ | Protein: ___g | Carbs: ___g | Fat: ___g  
     
     🍌 **Mid-Morning Snack**  
     ...
@@ -91,15 +92,17 @@ app.post('/api/generate-diet-plan', async (req, res) => {
     Protein: ___g | Carbs: ___g | Fat: ___g
     \`\`\`
     
-    ✅ Repeat for **Day 2** and **Day 3**  
+    ✅ Repeat for **Day 2**  
     ✅ No table format  
     ✅ Meals must be practical and realistic for a Kerala household.  
     ✅ Highlight each day with **bold headings**: **Day 1**, **Day 2**, **Day 3**
     first ensure proper calorie intake and give enough protein requriments use your brain.you are not giving enough protein give more and more protein and iincrease way more total calories also.think like a nutritionist dont be an idiot
     want more protein and total calories increase it.give more i need more protein and total calorie.total protein per day is not still enough i need more give more.add more eggs to complete protein goal .give minimum of 5 eggs per day for eggeterian and non vegiterian.dont give mutton and chicken biriyani to low budget and add more number of eggs as it is low cost
-    
+    add more eggs instead of going for expensive.give quantity for everything even for rice
     Start now with **Day 1**.
-    make sure till Protein: ___g | Carbs: ___g | Fat: ___g of dinner of day 3 is given 
+    make sure till **Daily Summary**:  
+    Calories: ___ kcal  
+    Protein: ___g | portion:__ |Carbs: ___g | Fat: ___g
     `;
     try {
         const response = await axios.post(
